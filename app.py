@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+import os
+from datetime import datetime
 
 st.set_page_config(layout="wide")
 st.title("🏘️ PenangPropInsight: ML-Powered Property Investment Analysis")
@@ -91,3 +93,20 @@ st.pyplot(fig)
 # Cluster Stats
 st.markdown("### 🔎 Cluster Summary")
 st.dataframe(selected_df.groupby("Cluster")[['Median_Price', 'Median_PSF', 'Transactions']].mean().round(2))
+
+# --------- ⏱️ Data Freshness ---------
+st.markdown("## ⏱️ Data Freshness")
+
+# Get the data modification time
+
+file_path = "houses_data.xlsx"
+if os.path.exists(file_path):
+    mod_time = os.path.getmtime(file_path)
+    last_updated = datetime.fromtimestamp(mod_time).strftime('%Y-%m-%d %H:%M:%S')
+    st.info(f"📅 Data last updated: {last_updated}")
+else:
+    st.warning("⚠️ Could not determine when data was last updated.")
+
+# Add a footer
+st.markdown("---")
+st.markdown("*PenangPropInsight is a machine learning powered tool for property investment analysis in Penang.*")
