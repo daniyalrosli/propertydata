@@ -2,7 +2,7 @@
 
 import streamlit as st
 import pandas as pd
-import seaborn as sns
+import seaborn as sns # type: ignore
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
